@@ -34,7 +34,11 @@ class ApiViewTest(TestCase):
 
         news_count = News.objects.all().count()
         self.assertEqual(response.status_code, 200)
+        # checking in DB
         self.assertEqual(news_count, 1)
+
+        # checking in Elasticsearch
+        self.assertEqual(self.es.get(index='news', id=1, doc_type='doc')['_source']['id'], 1)
 
         response = self.client.post(reverse('news_create'), json.dumps(data), **self.headers)
         self.assertEqual(response.status_code, 400)
