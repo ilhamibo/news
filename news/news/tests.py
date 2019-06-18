@@ -17,6 +17,7 @@ class ApiViewTest(TestCase):
         self.es = Elasticsearch() 
         NewsIndex.init()
         self.headers = {'content_type': 'application/json'}
+        self.client = Client()
 
     def test_news(self):
         News.objects.all().delete()
@@ -27,19 +28,19 @@ class ApiViewTest(TestCase):
             "author": "ilham syaiful akbar",
             "body": "New Journey Amiin"
         }
-        client = Client()
+        
         headers = {'content_type': 'application/json'}
-        response = client.post(reverse('news_create'), json.dumps(data), **self.headers)
+        response = self.client.post(reverse('news_create'), json.dumps(data), **self.headers)
 
         news_count = News.objects.all().count()
         self.assertEqual(response.status_code, 200)
         self.assertEqual(news_count, 1)
 
-        response = client.post(reverse('news_create'), json.dumps(data), **self.headers)
+        response = self.client.post(reverse('news_create'), json.dumps(data), **self.headers)
         self.assertEqual(response.status_code, 400)
 
     def test_get_news(self):
-        response = client.get(reverse('news'), **self.headers)
+        response = self.client.get(reverse('news'), **self.headers)
         response_json = json.loads(response.content)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response_json['count']), 1)
