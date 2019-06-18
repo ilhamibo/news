@@ -10,7 +10,7 @@ from news.news.documents import NewsIndex
 from news.news.task_queue import queue_create_news
 
 
-class BlogView(es_views.ListElasticAPIView):
+class ListNewsView(es_views.ListElasticAPIView):
     es_client = Elasticsearch(hosts=['localhost:9200/'],
                               connection_class=RequestsHttpConnection)
     es_model = NewsIndex
@@ -19,7 +19,7 @@ class BlogView(es_views.ListElasticAPIView):
     )
 
 
-class BlogCreateView(APIView):
+class NewsCreateView(APIView):
 
     def post(self, request):
         queue_create_news.delay(request.data)

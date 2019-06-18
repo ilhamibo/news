@@ -19,6 +19,6 @@ from news.news.api import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('news/', views.BlogView.as_view()),
-    path('news/create', views.BlogCreateView.as_view()),
+    path('news/', views.ListNewsView.as_view()),
+    path('news/create', views.NewsCreateView.as_view()),
 ]
