@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import sys
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -129,3 +130,12 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 CELERY_BROKER_URL = 'amqp://guest:guest@localhost:5672//'
+
+if 'test' in sys.argv:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(os.path.dirname(__file__), 'test.db'),
+            'TEST_NAME': os.path.join(os.path.dirname(__file__), 'test.db'),
+        }
+    }

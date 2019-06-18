@@ -20,5 +20,5 @@ from news.news.api import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('news/', views.ListNewsView.as_view()),
-    path('news/create', views.NewsCreateView.as_view()),
+    path('news_create/', views.NewsCreateView.as_view()),
 ]
