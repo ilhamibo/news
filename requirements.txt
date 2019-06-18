@@ -1,0 +1,14 @@
+# Core
+Django==2.2.2
+psycopg2==2.7.3
+
+# Libraries
+django-rest-elasticsearch==0.4.1
+requests==2.22.0
+
+# shortcuts
+django-extensions==2.1.9
+ipython==7.5.0
+
+# queue
+celery==4.3.0
