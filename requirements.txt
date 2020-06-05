@@ -1,5 +1,5 @@
 # Core
-Django==2.2.2
+Django==2.2.13
 psycopg2==2.7.3
 
 # Libraries
